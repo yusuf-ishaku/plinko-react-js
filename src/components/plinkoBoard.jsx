@@ -36,7 +36,7 @@ export const PlinkoBoard = () => {
     const scorePots = 9;
     for (let pot = 0; pot < scorePots; pot++){
       let x = (135) + (60* pot)
-      let y = 462
+      let y = 440
       const newPot = Bodies.rectangle( x , y, 65, 35, {
         isStatic: true,
         label: `point-${pot}`,
@@ -57,7 +57,7 @@ export const PlinkoBoard = () => {
     const scoreValues = [];
     for (let scoreValue = 0; scoreValue < scorePots; scoreValue++){
       let x = (135) + (60* scoreValue)
-      let y = 462
+      let y = 440
       const newScore = Bodies.rectangle( x , y, 65, 35, {
         isStatic: true,
         label: `point-${scoreValue}`,
@@ -111,8 +111,8 @@ export const PlinkoBoard = () => {
        
     }, [engine, score, setScore]);
     const addBall = () => {
-const values = [363, 370, 373, 378, 385];
-const randomVal = Math.floor(Math.random() * values.length);
+      const values = [300, 330, 360, 390, 440];
+      const randomVal = Math.floor(Math.random() * values.length);
       const ball = Bodies.circle(values[randomVal], 20, 10, {
            restitution: 0.5,
            friction: 0.7,
