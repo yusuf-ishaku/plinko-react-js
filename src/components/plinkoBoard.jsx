@@ -23,7 +23,7 @@ export const PlinkoBoard = () => {
     const rows = 8;
     for (let row = 1; row < rows; row++) {
       const pegsInRow = row + 1;
-        const spacing = 60;
+        const spacing = 55;
       for (let i = 0; i < pegsInRow; i++) {
         const x = (i - pegsInRow / 2) * spacing + 400;
         const y = row * spacing + -10;
@@ -70,7 +70,7 @@ export const PlinkoBoard = () => {
       scoreValues.push(newScore)
     }
     // Create bottom boundary
-    const ground = Bodies.rectangle(385, 500, 800, 40, { isStatic: true })
+    const ground = Bodies.rectangle(400, 500, 800, 40, { isStatic: true })
     // add all of the bodies to the world
     Composite.add(engine.world, [...pegs, ...scores,...scoreValues, ground]);
     
@@ -110,7 +110,7 @@ export const PlinkoBoard = () => {
        
     }, [engine, score, setScore]);
     const addBall = () => {
-      const ball = Bodies.circle(400, 20, 10, {
+      const ball = Bodies.circle(380, 20, 10, {
            restitution: 0.8,
            friction: 0.4,
            label: `ball-${20}`,
