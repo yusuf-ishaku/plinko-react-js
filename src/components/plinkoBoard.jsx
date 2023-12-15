@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import {Engine, Render, Runner, Bodies, Composite,Events,World}from "matter-js";
-import image from "../assets/multiplier1.5.png"
+import image from "../assets/multiplier1.5.png";
+import { multiplierImages } from "./multipliers";
 
 
 export const PlinkoBoard = () => {
@@ -62,7 +63,7 @@ export const PlinkoBoard = () => {
         label: `point-${scoreValue}`,
         render: {
             sprite: {
-              texture: image
+              texture: multiplierImages[scoreValue]
             }
         },
         restitution: 0.8
