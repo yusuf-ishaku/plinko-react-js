@@ -110,7 +110,7 @@ export const PlinkoBoard = () => {
        
     }, [engine, score, setScore]);
     const addBall = () => {
-const values = [368, 370, 372, 374, 376];
+const values = [363, 370, 373, 378, 385];
 const randomVal = Math.floor(Math.random() * values.length);
       const ball = Bodies.circle(values[randomVal], 20, 10, {
            restitution: 0.5,
