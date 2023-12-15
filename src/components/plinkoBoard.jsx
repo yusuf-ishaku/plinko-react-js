@@ -110,9 +110,9 @@ export const PlinkoBoard = () => {
        
     }, [engine, score, setScore]);
     const addBall = () => {
-      const ball = Bodies.circle(380, 20, 10, {
-           restitution: 0.8,
-           friction: 0.4,
+      const ball = Bodies.circle(376, 20, 10, {
+           restitution: 0.7,
+           friction: 0.2,
            label: `ball-${20}`,
            id: new Date().getTime(),
            frictionAir: 0.05,
