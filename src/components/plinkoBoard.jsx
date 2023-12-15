@@ -70,7 +70,7 @@ export const PlinkoBoard = () => {
       scoreValues.push(newScore)
     }
     // Create bottom boundary
-    const ground = Bodies.rectangle(400, 500, 800, 40, { isStatic: true })
+    const ground = Bodies.rectangle(385, 500, 800, 40, { isStatic: true })
     // add all of the bodies to the world
     Composite.add(engine.world, [...pegs, ...scores,...scoreValues, ground]);
     
