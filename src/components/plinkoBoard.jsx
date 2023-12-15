@@ -24,7 +24,7 @@ export const PlinkoBoard = () => {
     const rows = 8;
     for (let row = 1; row < rows; row++) {
       const pegsInRow = row + 1;
-        const spacing = 60;
+        const spacing = 55;
       for (let i = 0; i < pegsInRow; i++) {
         const x = (i - pegsInRow / 2) * spacing + 400;
         const y = row * spacing + -10;
@@ -111,9 +111,11 @@ export const PlinkoBoard = () => {
        
     }, [engine, score, setScore]);
     const addBall = () => {
-      const ball = Bodies.circle(400, 20, 10, {
-           restitution: 0.8,
-           friction: 0.4,
+const values = [363, 370, 373, 378, 385];
+const randomVal = Math.floor(Math.random() * values.length);
+      const ball = Bodies.circle(values[randomVal], 20, 10, {
+           restitution: 0.5,
+           friction: 0.7,
            label: `ball-${20}`,
            id: new Date().getTime(),
            frictionAir: 0.05,
