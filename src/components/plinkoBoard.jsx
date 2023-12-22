@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import {Engine, Render, Runner, Bodies, Composite,Events,World}from "matter-js";
+import {Engine, Render, Runner, Bodies, Composite,Events,World} from "matter-js";
 import image from "../assets/multiplier1.5.png";
 import { multiplierImages } from "./multipliers";
 
@@ -9,6 +9,9 @@ export const PlinkoBoard = () => {
     var engine = Engine.create();
     engine.world.gravity.y = 2;
     const [score, setScore] = useState(0);
+    const [pegs, setPegs] = useState([]);
+    // const [ran, setRan] = useState(0);
+    let ran = 0;
     useEffect(() => {
     var render = Render.create({
         element: canvasRef.current,
@@ -20,7 +23,7 @@ export const PlinkoBoard = () => {
             // background: '#e0e0e0'
         }
     });
-    const pegs = [];
+    
     const rows = 8;
     for (let row = 1; row < rows; row++) {
       const pegsInRow = row + 1;
@@ -28,10 +31,11 @@ export const PlinkoBoard = () => {
       for (let i = 0; i < pegsInRow; i++) {
         const x = (i - pegsInRow / 2) * spacing + 400;
         const y = row * spacing + -10;
-        const peg = Bodies.circle(x, y, 10, { isStatic: true, render: { fillStyle: '#4285f4' }, restitution: 0.8 });
+        const peg = Bodies.circle(x, y, 10, { isStatic: true, label: `${row}`, render: { fillStyle: '#4285f4' }, restitution: 0.8 });
         pegs.push(peg);
       }
     }
+    
     const scores = [];
     const scorePots = 9;
     for (let pot = 0; pot < scorePots; pot++){
@@ -109,7 +113,7 @@ export const PlinkoBoard = () => {
       render.textures = {}
     };
        
-    }, [engine, score, setScore]);
+    }, [engine, score, setScore, ran, pegs]);
     const addBall = () => {
       const values = [300, 330, 360, 390, 440];
       const randomVal = Math.floor(Math.random() * values.length);
@@ -129,10 +133,32 @@ export const PlinkoBoard = () => {
          })
          Composite.add(engine.world, ball);
    }
+    const animatePegs = (pegs) => {
+      console.log("red")
+      const setPegsInRow = (row) => {
+        const pegsInRow = pegs.filter((x) => x.label == `${row}`);
+        const pegsNotInRow = pegs.filter((x) => x.label !== `${row}`);
+       for(let i=0; i < pegsInRow.length; i++){
+        pegsInRow[i].render.fillStyle = "#fff"
+       }
+       for(let i = 0; i < pegsNotInRow.length; i++){
+        pegsNotInRow[i].render.fillStyle = '#4285f4'
+       }
+      }
+     for(let i = 1; i < 8; i++){
+      setTimeout(setPegsInRow, i * 500, i);
+     }
+     setTimeout(setPegsInRow, 4500, 0);
+     setTimeout(addBall, 5000);
+    }
+    const startGame = () => {
+      animatePegs(pegs);
+    }
+   
     return ( 
     <div className="whatever">
       <div className="entry">
-      <button onClick={addBall}>
+      <button onClick={startGame}>
         start game 
       </button>
       <h3>Your score: {score}</h3>
