@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import {Engine, Render, Runner, Bodies, Composite,Events,World} from "matter-js";
 import image from "../assets/multiplier1.5.png";
 import { multiplierImages } from "./multipliers";
+import { pots } from "./pots";
 
 
 export const PlinkoBoard = () => {
@@ -24,14 +25,14 @@ export const PlinkoBoard = () => {
         }
     });
     
-    const rows = 8;
-    for (let row = 1; row < rows; row++) {
+    const rows = 10;
+    for (let row = 2; row < rows; row++) {
       const pegsInRow = row + 1;
-        const spacing = 55;
+        const spacing = 50;
       for (let i = 0; i < pegsInRow; i++) {
         const x = (i - pegsInRow / 2) * spacing + 400;
-        const y = row * spacing + -10;
-        const peg = Bodies.circle(x, y, 10, { isStatic: true, label: `${row}`, render: { fillStyle: '#4285f4' }, restitution: 0.8 });
+        const y = row * spacing + -69;
+        const peg = Bodies.circle(x, y, 6, { isStatic: true, label: `${row}`, render: { fillStyle: '#fff' }, restitution: 0.8 });
         pegs.push(peg);
       }
     }
@@ -39,13 +40,13 @@ export const PlinkoBoard = () => {
     const scores = [];
     const scorePots = 9;
     for (let pot = 0; pot < scorePots; pot++){
-      let x = (135) + (60* pot)
-      let y = 440
-      const newPot = Bodies.rectangle( x , y, 65, 35, {
+      let x = (150) + (55* pot)
+      let y = 420
+      const newPot = Bodies.rectangle( x , y, 55, 35, {
         isStatic: true,
         label: `point-${pot}`,
         render: {
-          fillStyle: "#fff",
+          fillStyle: pots[pot].color,
           strokeStyle: '#000', // Border color
           lineWidth: 2, 
           text: {
@@ -60,8 +61,8 @@ export const PlinkoBoard = () => {
 
     const scoreValues = [];
     for (let scoreValue = 0; scoreValue < scorePots; scoreValue++){
-      let x = (135) + (60* scoreValue)
-      let y = 440
+      let x = (150) + (55* scoreValue)
+      let y = 420
       const newScore = Bodies.rectangle( x , y, 65, 35, {
         isStatic: true,
         label: `point-${scoreValue}`,
@@ -117,12 +118,12 @@ export const PlinkoBoard = () => {
     const addBall = () => {
       const values = [300, 330, 360, 390, 440];
       const randomVal = Math.floor(Math.random() * values.length);
-      const ball = Bodies.circle(values[randomVal], 20, 10, {
-           restitution: 0.5,
-           friction: 0.7,
+      const ball = Bodies.circle(values[randomVal], 20, 7, {
+           restitution: 0.6,
+           friction: 0.8,
            label: `ball-${20}`,
            id: new Date().getTime(),
-           frictionAir: 0.05,
+           frictionAir: 0.09,
            collisionFilter: {
              group: -1
            },
@@ -142,14 +143,15 @@ export const PlinkoBoard = () => {
         pegsInRow[i].render.fillStyle = "#fff"
        }
        for(let i = 0; i < pegsNotInRow.length; i++){
-        pegsNotInRow[i].render.fillStyle = '#4285f4'
+        pegsNotInRow[i].render.fillStyle = 'yellow'
        }
       }
-     for(let i = 1; i < 8; i++){
-      setTimeout(setPegsInRow, i * 500, i);
+     for(let i = 1; i < 11; i++){
+      setTimeout(setPegsInRow, i * 110, i);
      }
-     setTimeout(setPegsInRow, 4500, 0);
-     setTimeout(addBall, 5000);
+     
+     setTimeout(setPegsInRow, 1200, 0);
+     setTimeout(addBall, 1300);
     }
     const startGame = () => {
       animatePegs(pegs);

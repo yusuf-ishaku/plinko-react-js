@@ -11,5 +11,5 @@ import Image25 from "../assets/multipliers/multiplier15.png";
 
 
 export const multiplierImages = [
-Image03, Image05, Image1, Image15, Image18, Image33, image2, Image5, Image25
+Image03, Image05, Image1, Image15, Image18, Image33, image2, Image5, Image25, Image05
 ]
